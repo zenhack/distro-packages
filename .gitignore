@@ -2,3 +2,4 @@ BUILD
 RPMS
 SRPMS
 *.tar.*
+.vagrant
