@@ -9,9 +9,9 @@ upstream source tarballs in git.
 
 Note that some of these are not "distro quality" packages, in that they
 do not follow all of the guidelines for building packages. For example,
-particular, the Go packages rely on the standard Go tooling to fetch
-dependencies at build time, rather than packaging each dependency
-individual and then specifying them (redundantly) in the rpm spec.
+the Go packages rely on the standard Go tooling to fetch dependencies at
+build time, rather than packaging each dependency individually and then
+specifying them (redundantly) in the rpm spec.
 
 To build a package:
 
