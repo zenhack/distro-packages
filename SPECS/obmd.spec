@@ -8,6 +8,12 @@ URL:		https://github.com/CCI-MOC/obmd
 Source0:	https://github.com/CCI-MOC/obmd/archive/v%{version}.tar.gz
 BuildRequires:	go >= 1.11
 
+# Without this, rpmbuild tries to scrape executables for debug info, and when
+# it encounters the static executable we built, it complains that it can't find
+# the symbols it needs (because it's not linked against libc). This directive
+# simply disables building debuginfo packages.
+%define debug_package %{nil}
+
 %description
 OBMd is a microservice for managing the OBMs of machines, built for use with HIL.
 
@@ -15,7 +21,9 @@ OBMd is a microservice for managing the OBMs of machines, built for use with HIL
 %setup -n obmd-%{version}
 
 %build
-go build
+# CGO_ENABLED=0 makes sure we don't link against libc, which is important for
+# installing the package on older systems.
+CGO_ENABLED=0 go build
 
 %check
 go test ./...
